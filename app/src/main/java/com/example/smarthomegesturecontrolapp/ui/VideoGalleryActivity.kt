@@ -1,6 +1,8 @@
 package com.example.smarthomegesturecontrolapp.ui
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -29,6 +31,10 @@ class VideoGalleryActivity : AppCompatActivity() {
         val gridLayoutManager = GridLayoutManager(this, 2)
         rvVideos.layoutManager = gridLayoutManager
 
+        // Add spacing decoration for floating card effect (16dp spacing)
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid_spacing)
+        rvVideos.addItemDecoration(GridSpacingItemDecoration(2, spacingInPixels, true))
+
         // Initialize adapter with empty list
         videoAdapter = VideoAdapter(emptyList()) { video ->
             onVideoClicked(video)
@@ -54,5 +60,46 @@ class VideoGalleryActivity : AppCompatActivity() {
 
     private fun onVideoClicked(video: Video) {
         Toast.makeText(this, "Selected: ${video.name}", Toast.LENGTH_SHORT).show()
+    }
+
+    /**
+     * ItemDecoration for adding consistent spacing between grid items.
+     * Creates a floating card effect in the deep space theme.
+     */
+    class GridSpacingItemDecoration(
+        private val spanCount: Int,
+        private val spacing: Int,
+        private val includeEdge: Boolean
+    ) : RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect,
+            view: View,
+            parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            val position = parent.getChildAdapterPosition(view)
+            val column = position % spanCount
+
+            if (includeEdge) {
+                // Spacing for edge items
+                outRect.left = spacing - column * spacing / spanCount
+                outRect.right = (column + 1) * spacing / spanCount
+
+                // Top spacing for first row
+                if (position < spanCount) {
+                    outRect.top = spacing
+                }
+                outRect.bottom = spacing
+            } else {
+                // Spacing without edge
+                outRect.left = column * spacing / spanCount
+                outRect.right = spacing - (column + 1) * spacing / spanCount
+
+                if (position >= spanCount) {
+                    outRect.top = spacing
+                }
+            }
+        }
     }
 }
