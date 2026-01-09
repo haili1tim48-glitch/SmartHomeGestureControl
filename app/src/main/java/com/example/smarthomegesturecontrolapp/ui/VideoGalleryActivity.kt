@@ -3,6 +3,7 @@ package com.example.smarthomegesturecontrolapp.ui
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,8 +21,16 @@ class VideoGalleryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_gallery)
 
+        setupCloseButton()
         setupRecyclerView()
         loadSampleVideos()
+    }
+
+    private fun setupCloseButton() {
+        val btnClose: ImageButton = findViewById(R.id.btnClose)
+        btnClose.setOnClickListener {
+            finish()
+        }
     }
 
     private fun setupRecyclerView() {
