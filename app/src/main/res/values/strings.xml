@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">SmartHomeGestureControlApp</string>
+
+    <!-- MainActivity -->
+    <string name="load_available_gestures">Load Available Gestures</string>
+
+    <!-- GestureListActivity -->
+    <string name="available_gestures">Available Gestures</string>
+    <string name="downloading_gestures">Downloading gestures...</string>
+    <string name="retry">Retry</string>
+
+    <!-- Content Descriptions -->
+    <string name="gesture_icon_description">Gesture video icon</string>
+    <string name="error_icon_description">Error icon</string>
 </resources>
