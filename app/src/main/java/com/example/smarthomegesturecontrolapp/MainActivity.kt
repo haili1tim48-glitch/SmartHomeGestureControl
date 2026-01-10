@@ -6,8 +6,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.smarthomegesturecontrolapp.ui.VideoGalleryActivity
-import com.example.smarthomegesturecontrolapp.ui.viewmodel.MainViewModel
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import com.example.smarthomegesturecontrolapp.ui.gesturelist.GestureListActivity
+import com.google.android.material.button.MaterialButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +47,16 @@ class MainActivity : AppCompatActivity() {
         val btnBrowseVideos = findViewById<Button>(R.id.btnBrowseVideos)
         btnBrowseVideos.setOnClickListener {
             val intent = Intent(this, VideoGalleryActivity::class.java)
+            startActivity(intent)
+        }
+
+        setupLoadGesturesButton()
+    }
+
+    private fun setupLoadGesturesButton() {
+        val loadGesturesButton = findViewById<MaterialButton>(R.id.loadGesturesButton)
+        loadGesturesButton.setOnClickListener {
+            val intent = Intent(this, GestureListActivity::class.java)
             startActivity(intent)
         }
     }
