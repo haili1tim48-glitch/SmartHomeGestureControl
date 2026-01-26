@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.smarthomegesturecontrolapp.ui.GestureListActivity
 import com.example.smarthomegesturecontrolapp.ui.VideoGalleryActivity
 import com.example.smarthomegesturecontrolapp.ui.viewmodel.MainViewModel
 
@@ -35,10 +36,10 @@ class MainActivity : AppCompatActivity() {
             tvStatus.text = resultText.toString()
         }
 
-        // 4. Set up the Button Click
+        // 4. Set up the Button Click - Navigate to GestureListActivity
         btnLoad.setOnClickListener {
-            tvStatus.text = "Loading..."
-            viewModel.loadGestures() // Ask ViewModel to fetch data
+            val intent = Intent(this, GestureListActivity::class.java)
+            startActivity(intent)
         }
 
         // 5. Set up Browse Videos button
